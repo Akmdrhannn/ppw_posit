@@ -1,0 +1,30 @@
+project:
+  type: book
+
+book:
+  title: "PPW"
+  output-file: "PPW"
+  author: "20-095 Akhmad Raihan Aulia Fikri"
+  date: "2023"
+
+  chapters:
+    - index.qmd
+    - webcrawl.ipynb
+    - normalisasi.ipynb
+    - lda.ipynb
+    - crawl_berita.ipynb
+    - preprocessingberita.ipynb
+    - cosine_similarity.ipynb
+    - KatakunciPPW_Beritasatu_com_20_095_Akhmad_Raihan_A_F.ipynb
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: krantz
+    keep-tex: true
+    include-in-header: latex/preamble.tex
+    include-before-body: latex/before_body.tex
+    include-after-body: latex/after_body.tex

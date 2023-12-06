@@ -1,0 +1,4243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>PPW - 7&nbsp; Fitur Kata Kunci</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./cosine_similarity.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./KatakunciPPW_Beritasatu_com_20_095_Akhmad_Raihan_A_F.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fitur Kata Kunci</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">PPW</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./webcrawl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Web Crawling PTA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./normalisasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Normalisasi / Preprocessing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">LDA Topic Modelling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./crawl_berita.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Crawling berita 3 kategori</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocessingberita.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Preprocessing dan implementasi Cosinus Similarity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cosine_similarity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preprocessing dan implementasi Cosinus Similarity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./KatakunciPPW_Beritasatu_com_20_095_Akhmad_Raihan_A_F.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fitur Kata Kunci</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#menampilkan-data" id="toc-menampilkan-data" class="nav-link active" data-scroll-target="#menampilkan-data"><span class="header-section-number">7.1</span> <strong>Menampilkan data</strong></a>
+  <ul class="collapse">
+  <li><a href="#cek-data-duplikasi" id="toc-cek-data-duplikasi" class="nav-link" data-scroll-target="#cek-data-duplikasi"><span class="header-section-number">7.1.1</span> Cek data duplikasi</a></li>
+  <li><a href="#cek-data-null" id="toc-cek-data-null" class="nav-link" data-scroll-target="#cek-data-null"><span class="header-section-number">7.1.2</span> Cek data null</a></li>
+  <li><a href="#hapus-data-null" id="toc-hapus-data-null" class="nav-link" data-scroll-target="#hapus-data-null"><span class="header-section-number">7.1.3</span> Hapus data null</a></li>
+  <li><a href="#reset-index" id="toc-reset-index" class="nav-link" data-scroll-target="#reset-index"><span class="header-section-number">7.1.4</span> Reset Index</a></li>
+  <li><a href="#menghitung-jumlah-data-perkategori" id="toc-menghitung-jumlah-data-perkategori" class="nav-link" data-scroll-target="#menghitung-jumlah-data-perkategori"><span class="header-section-number">7.1.5</span> Menghitung jumlah data perkategori</a></li>
+  </ul></li>
+  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">7.2</span> Preprocessing</a>
+  <ul class="collapse">
+  <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data"><span class="header-section-number">7.2.1</span> Cleaning data</a></li>
+  <li><a href="#tokenisasi" id="toc-tokenisasi" class="nav-link" data-scroll-target="#tokenisasi"><span class="header-section-number">7.2.2</span> Tokenisasi</a></li>
+  </ul></li>
+  <li><a href="#memecah-kalimat" id="toc-memecah-kalimat" class="nav-link" data-scroll-target="#memecah-kalimat"><span class="header-section-number">7.3</span> Memecah Kalimat</a></li>
+  <li><a href="#co-occurance-matrix" id="toc-co-occurance-matrix" class="nav-link" data-scroll-target="#co-occurance-matrix"><span class="header-section-number">7.4</span> Co-occurance Matrix</a></li>
+  <li><a href="#konversi-ke-graph" id="toc-konversi-ke-graph" class="nav-link" data-scroll-target="#konversi-ke-graph"><span class="header-section-number">7.5</span> Konversi ke graph</a></li>
+  <li><a href="#menghitung-centrality-node" id="toc-menghitung-centrality-node" class="nav-link" data-scroll-target="#menghitung-centrality-node"><span class="header-section-number">7.6</span> Menghitung centrality node</a></li>
+  <li><a href="#ranking-node" id="toc-ranking-node" class="nav-link" data-scroll-target="#ranking-node"><span class="header-section-number">7.7</span> Ranking Node</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fitur Kata Kunci</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="menampilkan-data" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="menampilkan-data"><span class="header-section-number">7.1</span> <strong>Menampilkan data</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> sent_tokenize, word_tokenize</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="54b64430-3415-45a6-91ee-8fe0b94faf40">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.colab <span class="im">import</span> drive</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>drive.mount(<span class="st">'/content/drive'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount("/content/drive", force_remount=True).</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="e0d7b0a7-6269-4262-a864-089f8a976b14">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="op">=</span> pd.read_csv(<span class="st">'/content/drive/MyDrive/ppw/CosinusSimiliarity/databeritasatu.com/databeritasatu.csv'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dataf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+  <div id="df-d59d3b32-cdd6-4566-afb0-86802cf3dfee" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Kategori</th>
+<th data-quarto-table-cell-role="th">Judul</th>
+<th data-quarto-table-cell-role="th">Tanggal</th>
+<th data-quarto-table-cell-role="th">Link</th>
+<th data-quarto-table-cell-role="th">Konten</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Pemilu</td>
+<td>Gelar Dialog Kebangsaan, Kapolda Maluku Harap ...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2780002/g...</td>
+<td>Ambon, Beritasatu.com - Polda Maluku menggelar...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Pemilu</td>
+<td>Puluhan APK Caleg di Kota Semarang Ditertibkan...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779999/p...</td>
+<td>Semarang, Beritasatu.com - Sekitar 60 alat per...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Pemilu</td>
+<td>Langgar Aturan, Bawaslu Polman Tertibkan Ratus...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779992/l...</td>
+<td>Polewali Mandar, Beritasatu.com - Badan Pengaw...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Pemilu</td>
+<td>Deklarasi Pemilu Damai 2024, TNI dan Polri Tub...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779983/d...</td>
+<td>Tuban, Beritasatu.com – Komandan Kodim (Dandim...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Pemilu</td>
+<td>Respons Putusan MKMK, Anwar Usman: Ada Skenari...</td>
+<td>10 jam yang lalu</td>
+<td>https://www.beritasatu.com/nasional/2779964/re...</td>
+<td>Jakarta, Beritasatu.com - Hakim Mahkamah Konst...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1232</td>
+<td>Techno</td>
+<td>Inilah Daftar Lengkap Pemenang AMI Awards 2012</td>
+<td>5 Jul 2012 | 09:47 WIB</td>
+<td>https://www.beritasatu.com/news/58200/inilah-d...</td>
+<td>Agnes dan Afgan berbagi penghargaanrrAjang pen...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1233</td>
+<td>Techno</td>
+<td>Oka Sulaksana Tampil di ABG</td>
+<td>7 Jun 2012 | 16:25 WIB</td>
+<td>https://www.beritasatu.com/news/52678/oka-sula...</td>
+<td>Oka nantinya akan turun di kelas "techno" putr...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1234</td>
+<td>Techno</td>
+<td>Saat Pemakai Terangsang, Gaun ini Jadi Trasparan</td>
+<td>5 Apr 2012 | 15:42 WIB</td>
+<td>https://www.beritasatu.com/news/41000/saat-pem...</td>
+<td>Gaun ini segera dipasarkan.rrIntimacy 2.0, ada...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1235</td>
+<td>Techno</td>
+<td>Situs Mobil Esemka Palsu Beredar</td>
+<td>24 Feb 2012 | 13:43 WIB</td>
+<td>https://www.beritasatu.com/ekonomi/33442/situs...</td>
+<td>Pelaku membuat website palsu http://www.mobile...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1236</td>
+<td>Techno</td>
+<td>Mobil Esemka Diuji Coba dari Solo ke Jakarta</td>
+<td>24 Feb 2012 | 11:25 WIB</td>
+<td>https://www.beritasatu.com/news/33424/mobil-es...</td>
+<td>Mobil Esemka ini berangkat dari Solo melewati ...</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>1237 rows × 5 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-d59d3b32-cdd6-4566-afb0-86802cf3dfee')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-d59d3b32-cdd6-4566-afb0-86802cf3dfee button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-d59d3b32-cdd6-4566-afb0-86802cf3dfee');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-9e7d35b8-ba00-4015-92c7-4cd4cc972739">
+  <button class="colab-df-quickchart" onclick="quickchart('df-9e7d35b8-ba00-4015-92c7-4cd4cc972739')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-9e7d35b8-ba00-4015-92c7-4cd4cc972739 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<section id="cek-data-duplikasi" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="cek-data-duplikasi"><span class="header-section-number">7.1.1</span> Cek data duplikasi</h3>
+<div class="cell" data-outputid="fc0e5167-2c3a-47ac-a58f-8bb75a5ebf59">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dataf.drop_duplicates()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+  <div id="df-b36e6893-0b2e-4424-a3a9-2388b865e16e" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Kategori</th>
+<th data-quarto-table-cell-role="th">Judul</th>
+<th data-quarto-table-cell-role="th">Tanggal</th>
+<th data-quarto-table-cell-role="th">Link</th>
+<th data-quarto-table-cell-role="th">Konten</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Pemilu</td>
+<td>Gelar Dialog Kebangsaan, Kapolda Maluku Harap ...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2780002/g...</td>
+<td>Ambon, Beritasatu.com - Polda Maluku menggelar...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Pemilu</td>
+<td>Puluhan APK Caleg di Kota Semarang Ditertibkan...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779999/p...</td>
+<td>Semarang, Beritasatu.com - Sekitar 60 alat per...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Pemilu</td>
+<td>Langgar Aturan, Bawaslu Polman Tertibkan Ratus...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779992/l...</td>
+<td>Polewali Mandar, Beritasatu.com - Badan Pengaw...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Pemilu</td>
+<td>Deklarasi Pemilu Damai 2024, TNI dan Polri Tub...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779983/d...</td>
+<td>Tuban, Beritasatu.com – Komandan Kodim (Dandim...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Pemilu</td>
+<td>Respons Putusan MKMK, Anwar Usman: Ada Skenari...</td>
+<td>10 jam yang lalu</td>
+<td>https://www.beritasatu.com/nasional/2779964/re...</td>
+<td>Jakarta, Beritasatu.com - Hakim Mahkamah Konst...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1232</td>
+<td>Techno</td>
+<td>Inilah Daftar Lengkap Pemenang AMI Awards 2012</td>
+<td>5 Jul 2012 | 09:47 WIB</td>
+<td>https://www.beritasatu.com/news/58200/inilah-d...</td>
+<td>Agnes dan Afgan berbagi penghargaanrrAjang pen...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1233</td>
+<td>Techno</td>
+<td>Oka Sulaksana Tampil di ABG</td>
+<td>7 Jun 2012 | 16:25 WIB</td>
+<td>https://www.beritasatu.com/news/52678/oka-sula...</td>
+<td>Oka nantinya akan turun di kelas "techno" putr...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1234</td>
+<td>Techno</td>
+<td>Saat Pemakai Terangsang, Gaun ini Jadi Trasparan</td>
+<td>5 Apr 2012 | 15:42 WIB</td>
+<td>https://www.beritasatu.com/news/41000/saat-pem...</td>
+<td>Gaun ini segera dipasarkan.rrIntimacy 2.0, ada...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1235</td>
+<td>Techno</td>
+<td>Situs Mobil Esemka Palsu Beredar</td>
+<td>24 Feb 2012 | 13:43 WIB</td>
+<td>https://www.beritasatu.com/ekonomi/33442/situs...</td>
+<td>Pelaku membuat website palsu http://www.mobile...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1236</td>
+<td>Techno</td>
+<td>Mobil Esemka Diuji Coba dari Solo ke Jakarta</td>
+<td>24 Feb 2012 | 11:25 WIB</td>
+<td>https://www.beritasatu.com/news/33424/mobil-es...</td>
+<td>Mobil Esemka ini berangkat dari Solo melewati ...</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>1237 rows × 5 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b36e6893-0b2e-4424-a3a9-2388b865e16e')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b36e6893-0b2e-4424-a3a9-2388b865e16e button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b36e6893-0b2e-4424-a3a9-2388b865e16e');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-8531c291-4118-484f-bb2b-6170c9b6e184">
+  <button class="colab-df-quickchart" onclick="quickchart('df-8531c291-4118-484f-bb2b-6170c9b6e184')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-8531c291-4118-484f-bb2b-6170c9b6e184 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<section id="cek-data-null" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="cek-data-null"><span class="header-section-number">7.1.2</span> Cek data null</h3>
+<div class="cell" data-outputid="e34237c1-e341-484d-9535-ef9955a76e5d">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dataf.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>Kategori    0
+Judul       0
+Tanggal     0
+Link        0
+Konten      2
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="hapus-data-null" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="hapus-data-null"><span class="header-section-number">7.1.3</span> Hapus data null</h3>
+<div class="cell" data-outputid="33a1ae66-bf8d-44ad-8c00-497b35f59221">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dataf.dropna()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Kategori    0
+Judul       0
+Tanggal     0
+Link        0
+Konten      0
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="reset-index" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="reset-index"><span class="header-section-number">7.1.4</span> Reset Index</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="b4daa975-0df2-452b-cf96-e1e9f702f4f2">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>(1235, 5)</code></pre>
+</div>
+</div>
+</section>
+<section id="menghitung-jumlah-data-perkategori" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="menghitung-jumlah-data-perkategori"><span class="header-section-number">7.1.5</span> Menghitung jumlah data perkategori</h3>
+<div class="cell" data-outputid="b0266f5f-9e19-476f-a712-90128bb9d228">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Kategori'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>Sport     500
+Pemilu    498
+Techno    237
+Name: Kategori, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="preprocessing" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">7.2</span> Preprocessing</h2>
+<section id="cleaning-data" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="cleaning-data"><span class="header-section-number">7.2.1</span> Cleaning data</h3>
+<p>Lower Case</p>
+<div class="cell" data-outputid="1dc75da5-71e5-4df1-80a3-b4a8ab83588d">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Konten'</span>] <span class="op">=</span> df[<span class="st">'Konten'</span>].<span class="bu">str</span>.lower()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Konten'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0       ambon, beritasatu.com - polda maluku menggelar...
+1       semarang, beritasatu.com - sekitar 60 alat per...
+2       polewali mandar, beritasatu.com - badan pengaw...
+3       tuban, beritasatu.com – komandan kodim (dandim...
+4       jakarta, beritasatu.com - hakim mahkamah konst...
+                              ...                        
+1230    agnes dan afgan berbagi penghargaanrrajang pen...
+1231    oka nantinya akan turun di kelas "techno" putr...
+1232    gaun ini segera dipasarkan.rrintimacy 2.0, ada...
+1233    pelaku membuat website palsu http://www.mobile...
+1234    mobil esemka ini berangkat dari solo melewati ...
+Name: Konten, Length: 1235, dtype: object</code></pre>
+</div>
+</div>
+<p>Menghapus kata</p>
+<div class="cell" data-outputid="9056deaa-bf59-44ce-94a2-dfcf6c5de154">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daftar kata yang ingin dihilangkan</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>kata_hapus <span class="op">=</span> [<span class="st">'advertisement'</span>, <span class="st">'beritasatu.com'</span>,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, <span class="st">'dan'</span>,<span class="st">'ini'</span>,<span class="st">'itu'</span>,<span class="st">'adalah'</span>,<span class="st">'di'</span>,<span class="st">'yang'</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Melakukan pengolahan pada setiap baris di kolom 'Konten'</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> kata <span class="kw">in</span> kata_hapus:</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Konten'</span>] <span class="op">=</span> df[<span class="st">'Konten'</span>].<span class="bu">str</span>.replace(kata, <span class="st">''</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Menampilkan DataFrame setelah pengolahan</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Konten'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0       ambon,  - polda maluku menggelar alog kebangsa...
+1       semarang,  - sekitar 60 alat peraga kampanye (...
+2       polewali mandar,  - ba pengawas pemilu (bawasl...
+3       tuban,  – koman kom (m) 0811/tuban, bersama ka...
+4       jakarta,  - hakim mahkamah konstsi (mk) anwar ...
+                              ...                        
+1230    agnes  afgan berbagi penghargaanrrajang pengha...
+1231    oka nantinya akan turun  kelas "techno" putra,...
+1232    gaun  segera pasarkan.rrintimacy 2.0,  nama ga...
+1233    pelaku membuat website palsu http://www.mobile...
+1234    mobil esemka  berangkat dari solo melewati rut...
+Name: Konten, Length: 1235, dtype: object</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>FutureWarning: The default value of regex will change from True to False in a future version.
+  df['Konten'] = df['Konten'].str.replace(kata, '')</code></pre>
+</div>
+</div>
+<p>Hapus Karakter Khusus</p>
+<div class="cell" data-outputid="4fdde835-3a61-4411-827b-98ef29b90864">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Konten'</span>] <span class="op">=</span> df[<span class="st">'Konten'</span>].<span class="bu">str</span>.replace(<span class="st">'[^a-zA-Z\s]'</span>, <span class="st">''</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Konten'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>FutureWarning: The default value of regex will change from True to False in a future version.
+  df['Konten'] = df['Konten'].str.replace('[^a-zA-Z\s]', '')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>0       ambon   polda maluku menggelar alog kebangsaan...
+1       semarang   sekitar  alat peraga kampanye apk c...
+2       polewali mandar   ba pengawas pemilu bawaslu k...
+3       tuban   koman kom m tuban bersama kapolres tub...
+4       jakarta   hakim mahkamah konstsi mk anwar usma...
+                              ...                        
+1230    agnes  afgan berbagi penghargaanrrajang pengha...
+1231    oka nantinya akan turun  kelas techno putrar&nbsp;r...
+1232    gaun  segera pasarkanrrintimacy   nama gaun te...
+1233    pelaku membuat website palsu httpwwwmobilesemk...
+1234    mobil esemka  berangkat dari solo melewati rut...
+Name: Konten, Length: 1235, dtype: object</code></pre>
+</div>
+</div>
+<p>Hapus Angka</p>
+<div class="cell" data-outputid="674ff111-d5e2-4e22-a94b-90608cb6b422">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Konten'</span>] <span class="op">=</span> df[<span class="st">'Konten'</span>].<span class="bu">str</span>.replace(<span class="st">'\d+'</span>, <span class="st">''</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Konten'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>FutureWarning: The default value of regex will change from True to False in a future version.
+  df['Konten'] = df['Konten'].str.replace('\d+', '')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>0       ambon   polda maluku menggelar alog kebangsaan...
+1       semarang   sekitar  alat peraga kampanye apk c...
+2       polewali mandar   ba pengawas pemilu bawaslu k...
+3       tuban   koman kom m tuban bersama kapolres tub...
+4       jakarta   hakim mahkamah konstsi mk anwar usma...
+                              ...                        
+1230    agnes  afgan berbagi penghargaanrrajang pengha...
+1231    oka nantinya akan turun  kelas techno putrar&nbsp;r...
+1232    gaun  segera pasarkanrrintimacy   nama gaun te...
+1233    pelaku membuat website palsu httpwwwmobilesemk...
+1234    mobil esemka  berangkat dari solo melewati rut...
+Name: Konten, Length: 1235, dtype: object</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="e416a581-032f-4a74-8166-2ce91f305ef8">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>(1235, 5)</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="450bdd4b-c243-4270-f5f2-e630094f73c9">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'cleaning'</span>] <span class="op">=</span> df[<span class="st">'Konten'</span>].<span class="bu">str</span>.replace(<span class="vs">r'[^\w\s,.?!]'</span>, <span class="st">''</span>, regex<span class="op">=</span><span class="va">True</span>).<span class="bu">str</span>.lower()</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+  <div id="df-b26f84ac-8632-45b7-b938-b7052b3cbec7" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Kategori</th>
+<th data-quarto-table-cell-role="th">Judul</th>
+<th data-quarto-table-cell-role="th">Tanggal</th>
+<th data-quarto-table-cell-role="th">Link</th>
+<th data-quarto-table-cell-role="th">Konten</th>
+<th data-quarto-table-cell-role="th">cleaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Pemilu</td>
+<td>Gelar Dialog Kebangsaan, Kapolda Maluku Harap ...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2780002/g...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Pemilu</td>
+<td>Puluhan APK Caleg di Kota Semarang Ditertibkan...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779999/p...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Pemilu</td>
+<td>Langgar Aturan, Bawaslu Polman Tertibkan Ratus...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779992/l...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Pemilu</td>
+<td>Deklarasi Pemilu Damai 2024, TNI dan Polri Tub...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779983/d...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Pemilu</td>
+<td>Respons Putusan MKMK, Anwar Usman: Ada Skenari...</td>
+<td>10 jam yang lalu</td>
+<td>https://www.beritasatu.com/nasional/2779964/re...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1230</td>
+<td>Techno</td>
+<td>Inilah Daftar Lengkap Pemenang AMI Awards 2012</td>
+<td>5 Jul 2012 | 09:47 WIB</td>
+<td>https://www.beritasatu.com/news/58200/inilah-d...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1231</td>
+<td>Techno</td>
+<td>Oka Sulaksana Tampil di ABG</td>
+<td>7 Jun 2012 | 16:25 WIB</td>
+<td>https://www.beritasatu.com/news/52678/oka-sula...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1232</td>
+<td>Techno</td>
+<td>Saat Pemakai Terangsang, Gaun ini Jadi Trasparan</td>
+<td>5 Apr 2012 | 15:42 WIB</td>
+<td>https://www.beritasatu.com/news/41000/saat-pem...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1233</td>
+<td>Techno</td>
+<td>Situs Mobil Esemka Palsu Beredar</td>
+<td>24 Feb 2012 | 13:43 WIB</td>
+<td>https://www.beritasatu.com/ekonomi/33442/situs...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1234</td>
+<td>Techno</td>
+<td>Mobil Esemka Diuji Coba dari Solo ke Jakarta</td>
+<td>24 Feb 2012 | 11:25 WIB</td>
+<td>https://www.beritasatu.com/news/33424/mobil-es...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>1235 rows × 6 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b26f84ac-8632-45b7-b938-b7052b3cbec7')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b26f84ac-8632-45b7-b938-b7052b3cbec7 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b26f84ac-8632-45b7-b938-b7052b3cbec7');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-1fc2b8eb-7d3b-4027-a14d-65415d455d2d">
+  <button class="colab-df-quickchart" onclick="quickchart('df-1fc2b8eb-7d3b-4027-a14d-65415d455d2d')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-1fc2b8eb-7d3b-4027-a14d-65415d455d2d button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<section id="tokenisasi" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="tokenisasi"><span class="header-section-number">7.2.2</span> Tokenisasi</h3>
+<div class="cell" data-outputid="b4a8bb0a-f04a-4992-a674-7827c3a41090">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'punkt'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> sent_tokenize</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt.zip.</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="4350c6b6-9622-4bca-cc7d-3ae1ade91d5b">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenisasi teks menjadi kalimat menggunakan nltk</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'tokenize'</span>] <span class="op">=</span> df[<span class="st">'cleaning'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">' '</span>.join(nltk.sent_tokenize(x)))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+
+  <div id="df-13538d56-84e5-4737-ae64-fb0f6a6c345b" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Kategori</th>
+<th data-quarto-table-cell-role="th">Judul</th>
+<th data-quarto-table-cell-role="th">Tanggal</th>
+<th data-quarto-table-cell-role="th">Link</th>
+<th data-quarto-table-cell-role="th">Konten</th>
+<th data-quarto-table-cell-role="th">cleaning</th>
+<th data-quarto-table-cell-role="th">tokenize</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Pemilu</td>
+<td>Gelar Dialog Kebangsaan, Kapolda Maluku Harap ...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2780002/g...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Pemilu</td>
+<td>Puluhan APK Caleg di Kota Semarang Ditertibkan...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779999/p...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Pemilu</td>
+<td>Langgar Aturan, Bawaslu Polman Tertibkan Ratus...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779992/l...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Pemilu</td>
+<td>Deklarasi Pemilu Damai 2024, TNI dan Polri Tub...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779983/d...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Pemilu</td>
+<td>Respons Putusan MKMK, Anwar Usman: Ada Skenari...</td>
+<td>10 jam yang lalu</td>
+<td>https://www.beritasatu.com/nasional/2779964/re...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1230</td>
+<td>Techno</td>
+<td>Inilah Daftar Lengkap Pemenang AMI Awards 2012</td>
+<td>5 Jul 2012 | 09:47 WIB</td>
+<td>https://www.beritasatu.com/news/58200/inilah-d...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1231</td>
+<td>Techno</td>
+<td>Oka Sulaksana Tampil di ABG</td>
+<td>7 Jun 2012 | 16:25 WIB</td>
+<td>https://www.beritasatu.com/news/52678/oka-sula...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1232</td>
+<td>Techno</td>
+<td>Saat Pemakai Terangsang, Gaun ini Jadi Trasparan</td>
+<td>5 Apr 2012 | 15:42 WIB</td>
+<td>https://www.beritasatu.com/news/41000/saat-pem...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1233</td>
+<td>Techno</td>
+<td>Situs Mobil Esemka Palsu Beredar</td>
+<td>24 Feb 2012 | 13:43 WIB</td>
+<td>https://www.beritasatu.com/ekonomi/33442/situs...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1234</td>
+<td>Techno</td>
+<td>Mobil Esemka Diuji Coba dari Solo ke Jakarta</td>
+<td>24 Feb 2012 | 11:25 WIB</td>
+<td>https://www.beritasatu.com/news/33424/mobil-es...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>1235 rows × 7 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-13538d56-84e5-4737-ae64-fb0f6a6c345b')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-13538d56-84e5-4737-ae64-fb0f6a6c345b button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-13538d56-84e5-4737-ae64-fb0f6a6c345b');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-168fa99e-f09c-42a6-8fcf-dd65a8664988">
+  <button class="colab-df-quickchart" onclick="quickchart('df-168fa99e-f09c-42a6-8fcf-dd65a8664988')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-168fa99e-f09c-42a6-8fcf-dd65a8664988 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="cell" data-outputid="894b5fc0-51d4-4da0-fa9d-1eee00450aa9">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'tokenize'</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>'ambon   polda maluku menggelar alog kebangsaan  berlangsung  gedung plasa presisi polda maluku pada rabu  sore acara alog kebangsaan bertujuan untuk mewujudkan pemilu damai tahun  sehingga dapat berjalan dengan lancar aman  damaisaya selaku kapolda maluku mengucapkan terima kasih  apresiasi kepada tni polri pemda kpu bawaslu okp tokoh agama tokoh masyarakat  insan pers atas sinergitas koornasi  komunikasi  terjalin selama  kata kapolda maluku irjen pol lotharia latif saat membuka alog kebangsaandalam alog kebangsaan kali  mengusung tema peran masyarakat dalam mewujudkan pemilu   aman  damai sebagai sarana integrasi bangsa  wilayah malukubaca jugadeklarasi pemilu damai  tni  polri tuban pastikan netral pelaksanaan pemilu  hanya tinggal menghng  hari lagi   merupakan pekerjaan besar  sangat menentukan masa depan bangsa  negara untuk  pada sore hari  kita melaksanakan alog kebangsaan dengan harapan pemilu   maluku dapat terlaksana dengan aman  damai katanyajelang pemilu polri dukung oleh tni  instansi lainnya melaksanakan operasi mantap brata omb salawaku  melakukan patroli  sejumlah titik kerawanan  tempat umum lainnya  ambonbaca jugapolres kolaka bagikan  stiker ajakan pemilu damaioperasi  akan berlangsung selama  hari mulai dari  oktober  hingga  oktober  operasi  menekankan kegiatan preemtif  preventif  dukung oleh kegiatan intelijen serta penegakan hukumkami  polri telah berkomitmen untuk tetap bersikap netral dalam pemilu  sesuai aturan  ketentuan  berlaku kata kapoldadalam rangka persiapan pemilu  polda maluku telah melaksanakan berbagai kegiatan termasuk apel gelar pasukan pengamanan pemilu simulasi sistem pengamanan kota operasi mantap brata salawaku  program basudara manise  alog kebangsaandengan alog kebangsaan  saya berharap tercipta kesadaran bersama untuk menjaga sasi kamtibmas  aman  kondusif  maluku ujarnyakapolda mengakui bahwa sinergisitas antara para pemangku kepentingan serta seluruh elemen bangsa  kesiapan instansi dalam menghadapi berbagai potensi kerawanan pemilu  kunci keberhasilan pemilu irjen latif juga berharap alog kebangsaan  dapat jakan sarana untuk saling bertukar informasi komunikasi  koornasi guna menjaga kamtibmas  kondusif  malukuhindari politik identitas polarisasi isuisu sara  rawat kebhinekaan untuk persatuan  kesatuan pintanyapemilu kata kapolda harus berjalan aman damai  bebas dari rahasia jujur al serta mampu menghasilkan pemimpin  wakilwakil rakyat  berkualitas hindari menyebarkan berita palsu karena dapat merusak integritas pemilu  menimbulkan polarisasi serta perpecahan dalam masyarakat pungkasnyakegiatan alog kebangsaan  hari oleh penyelenggara pemilu yakni kpu bawaslu tni polri pemda tokoh agama tokoh masyarakat okp  insan pers  ambon maluku pemilu pemilu  alog kebangsaan alog kebangsaan polda maluku pemilu damai'</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="memecah-kalimat" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="memecah-kalimat"><span class="header-section-number">7.3</span> Memecah Kalimat</h2>
+<div class="cell" data-outputid="bcd44540-66c8-4bf8-fca6-b1dc4c86734e">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'pecah'</span>] <span class="op">=</span> df[<span class="st">'tokenize'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: sent_tokenize(<span class="bu">str</span>(x)) <span class="cf">if</span> pd.notnull(x) <span class="cf">else</span> [])</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+
+  <div id="df-a62638db-2504-4dda-a60f-abc9143c4abd" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Kategori</th>
+<th data-quarto-table-cell-role="th">Judul</th>
+<th data-quarto-table-cell-role="th">Tanggal</th>
+<th data-quarto-table-cell-role="th">Link</th>
+<th data-quarto-table-cell-role="th">Konten</th>
+<th data-quarto-table-cell-role="th">cleaning</th>
+<th data-quarto-table-cell-role="th">tokenize</th>
+<th data-quarto-table-cell-role="th">pecah</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Pemilu</td>
+<td>Gelar Dialog Kebangsaan, Kapolda Maluku Harap ...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2780002/g...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+<td>ambon polda maluku menggelar alog kebangsaan...</td>
+<td>[ambon polda maluku menggelar alog kebangsaa...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Pemilu</td>
+<td>Puluhan APK Caleg di Kota Semarang Ditertibkan...</td>
+<td>5 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779999/p...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+<td>semarang sekitar alat peraga kampanye apk c...</td>
+<td>[semarang sekitar alat peraga kampanye apk ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Pemilu</td>
+<td>Langgar Aturan, Bawaslu Polman Tertibkan Ratus...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779992/l...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+<td>polewali mandar ba pengawas pemilu bawaslu k...</td>
+<td>[polewali mandar ba pengawas pemilu bawaslu ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Pemilu</td>
+<td>Deklarasi Pemilu Damai 2024, TNI dan Polri Tub...</td>
+<td>7 jam yang lalu</td>
+<td>https://www.beritasatu.com/nusantara/2779983/d...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+<td>tuban koman kom m tuban bersama kapolres tub...</td>
+<td>[tuban koman kom m tuban bersama kapolres tu...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Pemilu</td>
+<td>Respons Putusan MKMK, Anwar Usman: Ada Skenari...</td>
+<td>10 jam yang lalu</td>
+<td>https://www.beritasatu.com/nasional/2779964/re...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+<td>jakarta hakim mahkamah konstsi mk anwar usma...</td>
+<td>[jakarta hakim mahkamah konstsi mk anwar usm...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1230</td>
+<td>Techno</td>
+<td>Inilah Daftar Lengkap Pemenang AMI Awards 2012</td>
+<td>5 Jul 2012 | 09:47 WIB</td>
+<td>https://www.beritasatu.com/news/58200/inilah-d...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+<td>agnes afgan berbagi penghargaanrrajang pengha...</td>
+<td>[agnes afgan berbagi penghargaanrrajang pengh...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1231</td>
+<td>Techno</td>
+<td>Oka Sulaksana Tampil di ABG</td>
+<td>7 Jun 2012 | 16:25 WIB</td>
+<td>https://www.beritasatu.com/news/52678/oka-sula...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+<td>oka nantinya akan turun kelas techno putrar&nbsp;r...</td>
+<td>[oka nantinya akan turun kelas techno putrar&nbsp;...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1232</td>
+<td>Techno</td>
+<td>Saat Pemakai Terangsang, Gaun ini Jadi Trasparan</td>
+<td>5 Apr 2012 | 15:42 WIB</td>
+<td>https://www.beritasatu.com/news/41000/saat-pem...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+<td>gaun segera pasarkanrrintimacy nama gaun te...</td>
+<td>[gaun segera pasarkanrrintimacy nama gaun t...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1233</td>
+<td>Techno</td>
+<td>Situs Mobil Esemka Palsu Beredar</td>
+<td>24 Feb 2012 | 13:43 WIB</td>
+<td>https://www.beritasatu.com/ekonomi/33442/situs...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+<td>pelaku membuat website palsu httpwwwmobilesemk...</td>
+<td>[pelaku membuat website palsu httpwwwmobilesem...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1234</td>
+<td>Techno</td>
+<td>Mobil Esemka Diuji Coba dari Solo ke Jakarta</td>
+<td>24 Feb 2012 | 11:25 WIB</td>
+<td>https://www.beritasatu.com/news/33424/mobil-es...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+<td>mobil esemka berangkat dari solo melewati rut...</td>
+<td>[mobil esemka berangkat dari solo melewati ru...</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>1235 rows × 8 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a62638db-2504-4dda-a60f-abc9143c4abd')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-a62638db-2504-4dda-a60f-abc9143c4abd button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-a62638db-2504-4dda-a60f-abc9143c4abd');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-918232e5-edba-42ce-9037-63301781a0b2">
+  <button class="colab-df-quickchart" onclick="quickchart('df-918232e5-edba-42ce-9037-63301781a0b2')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-918232e5-edba-42ce-9037-63301781a0b2 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="cell" data-outputid="a87f2ed3-32bd-4681-8e05-f5cf3488246d">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'pecah'</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>['ambon   polda maluku menggelar alog kebangsaan  berlangsung  gedung plasa presisi polda maluku pada rabu  sore acara alog kebangsaan bertujuan untuk mewujudkan pemilu damai tahun  sehingga dapat berjalan dengan lancar aman  damaisaya selaku kapolda maluku mengucapkan terima kasih  apresiasi kepada tni polri pemda kpu bawaslu okp tokoh agama tokoh masyarakat  insan pers atas sinergitas koornasi  komunikasi  terjalin selama  kata kapolda maluku irjen pol lotharia latif saat membuka alog kebangsaandalam alog kebangsaan kali  mengusung tema peran masyarakat dalam mewujudkan pemilu   aman  damai sebagai sarana integrasi bangsa  wilayah malukubaca jugadeklarasi pemilu damai  tni  polri tuban pastikan netral pelaksanaan pemilu  hanya tinggal menghng  hari lagi   merupakan pekerjaan besar  sangat menentukan masa depan bangsa  negara untuk  pada sore hari  kita melaksanakan alog kebangsaan dengan harapan pemilu   maluku dapat terlaksana dengan aman  damai katanyajelang pemilu polri dukung oleh tni  instansi lainnya melaksanakan operasi mantap brata omb salawaku  melakukan patroli  sejumlah titik kerawanan  tempat umum lainnya  ambonbaca jugapolres kolaka bagikan  stiker ajakan pemilu damaioperasi  akan berlangsung selama  hari mulai dari  oktober  hingga  oktober  operasi  menekankan kegiatan preemtif  preventif  dukung oleh kegiatan intelijen serta penegakan hukumkami  polri telah berkomitmen untuk tetap bersikap netral dalam pemilu  sesuai aturan  ketentuan  berlaku kata kapoldadalam rangka persiapan pemilu  polda maluku telah melaksanakan berbagai kegiatan termasuk apel gelar pasukan pengamanan pemilu simulasi sistem pengamanan kota operasi mantap brata salawaku  program basudara manise  alog kebangsaandengan alog kebangsaan  saya berharap tercipta kesadaran bersama untuk menjaga sasi kamtibmas  aman  kondusif  maluku ujarnyakapolda mengakui bahwa sinergisitas antara para pemangku kepentingan serta seluruh elemen bangsa  kesiapan instansi dalam menghadapi berbagai potensi kerawanan pemilu  kunci keberhasilan pemilu irjen latif juga berharap alog kebangsaan  dapat jakan sarana untuk saling bertukar informasi komunikasi  koornasi guna menjaga kamtibmas  kondusif  malukuhindari politik identitas polarisasi isuisu sara  rawat kebhinekaan untuk persatuan  kesatuan pintanyapemilu kata kapolda harus berjalan aman damai  bebas dari rahasia jujur al serta mampu menghasilkan pemimpin  wakilwakil rakyat  berkualitas hindari menyebarkan berita palsu karena dapat merusak integritas pemilu  menimbulkan polarisasi serta perpecahan dalam masyarakat pungkasnyakegiatan alog kebangsaan  hari oleh penyelenggara pemilu yakni kpu bawaslu tni polri pemda tokoh agama tokoh masyarakat okp  insan pers  ambon maluku pemilu pemilu  alog kebangsaan alog kebangsaan polda maluku pemilu damai']</code></pre>
+</div>
+</div>
+<p>Memakai 1 berita</p>
+<div class="cell" data-outputid="9a3e728a-75e5-47a5-cc40-fce89adfb037">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengambil berita dengan indeks tertentu</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>single_news_list <span class="op">=</span> df[<span class="st">'pecah'</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Menggabungkan semua kalimat menjadi satu teks panjang</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>single_news <span class="op">=</span> <span class="st">' '</span>.join(single_news_list)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Memecah kalimat dari berita tunggal</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>sentences <span class="op">=</span> sent_tokenize(single_news)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>sentences</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>['ambon   polda maluku menggelar alog kebangsaan  berlangsung  gedung plasa presisi polda maluku pada rabu  sore acara alog kebangsaan bertujuan untuk mewujudkan pemilu damai tahun  sehingga dapat berjalan dengan lancar aman  damaisaya selaku kapolda maluku mengucapkan terima kasih  apresiasi kepada tni polri pemda kpu bawaslu okp tokoh agama tokoh masyarakat  insan pers atas sinergitas koornasi  komunikasi  terjalin selama  kata kapolda maluku irjen pol lotharia latif saat membuka alog kebangsaandalam alog kebangsaan kali  mengusung tema peran masyarakat dalam mewujudkan pemilu   aman  damai sebagai sarana integrasi bangsa  wilayah malukubaca jugadeklarasi pemilu damai  tni  polri tuban pastikan netral pelaksanaan pemilu  hanya tinggal menghng  hari lagi   merupakan pekerjaan besar  sangat menentukan masa depan bangsa  negara untuk  pada sore hari  kita melaksanakan alog kebangsaan dengan harapan pemilu   maluku dapat terlaksana dengan aman  damai katanyajelang pemilu polri dukung oleh tni  instansi lainnya melaksanakan operasi mantap brata omb salawaku  melakukan patroli  sejumlah titik kerawanan  tempat umum lainnya  ambonbaca jugapolres kolaka bagikan  stiker ajakan pemilu damaioperasi  akan berlangsung selama  hari mulai dari  oktober  hingga  oktober  operasi  menekankan kegiatan preemtif  preventif  dukung oleh kegiatan intelijen serta penegakan hukumkami  polri telah berkomitmen untuk tetap bersikap netral dalam pemilu  sesuai aturan  ketentuan  berlaku kata kapoldadalam rangka persiapan pemilu  polda maluku telah melaksanakan berbagai kegiatan termasuk apel gelar pasukan pengamanan pemilu simulasi sistem pengamanan kota operasi mantap brata salawaku  program basudara manise  alog kebangsaandengan alog kebangsaan  saya berharap tercipta kesadaran bersama untuk menjaga sasi kamtibmas  aman  kondusif  maluku ujarnyakapolda mengakui bahwa sinergisitas antara para pemangku kepentingan serta seluruh elemen bangsa  kesiapan instansi dalam menghadapi berbagai potensi kerawanan pemilu  kunci keberhasilan pemilu irjen latif juga berharap alog kebangsaan  dapat jakan sarana untuk saling bertukar informasi komunikasi  koornasi guna menjaga kamtibmas  kondusif  malukuhindari politik identitas polarisasi isuisu sara  rawat kebhinekaan untuk persatuan  kesatuan pintanyapemilu kata kapolda harus berjalan aman damai  bebas dari rahasia jujur al serta mampu menghasilkan pemimpin  wakilwakil rakyat  berkualitas hindari menyebarkan berita palsu karena dapat merusak integritas pemilu  menimbulkan polarisasi serta perpecahan dalam masyarakat pungkasnyakegiatan alog kebangsaan  hari oleh penyelenggara pemilu yakni kpu bawaslu tni polri pemda tokoh agama tokoh masyarakat okp  insan pers  ambon maluku pemilu pemilu  alog kebangsaan alog kebangsaan polda maluku pemilu damai']</code></pre>
+</div>
+</div>
+</section>
+<section id="co-occurance-matrix" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="co-occurance-matrix"><span class="header-section-number">7.4</span> Co-occurance Matrix</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menggabungkan semua kalimat menjadi satu teks panjang</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>corpus_single_news <span class="op">=</span> <span class="st">' '</span>.join(sentences)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenisasi kata</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>tokens_single_news <span class="op">=</span> word_tokenize(corpus_single_news)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Membentuk co-occurrence matrix</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>co_occ_matrix_single_news <span class="op">=</span> nltk.FreqDist(nltk.bigrams(tokens_single_news))</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'source'</span>: [pair[<span class="dv">0</span>] <span class="cf">for</span> pair <span class="kw">in</span> co_occ_matrix_single_news.keys()],</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'target'</span>: [pair[<span class="dv">1</span>] <span class="cf">for</span> pair <span class="kw">in</span> co_occ_matrix_single_news.keys()],</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'weight'</span>: <span class="bu">list</span>(co_occ_matrix_single_news.values())}</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Ubah co-occurrence matrix ke dalam DataFrame</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>co_occ_df_single_news <span class="op">=</span> pd.DataFrame(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="efc7896e-fa7a-4d68-90a7-bce36982ac2e">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>co_occ_df_single_news</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+
+  <div id="df-762f7888-c0f9-4924-ab86-c8c72e378ae2" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">source</th>
+<th data-quarto-table-cell-role="th">target</th>
+<th data-quarto-table-cell-role="th">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ambon</td>
+<td>polda</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>polda</td>
+<td>maluku</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>maluku</td>
+<td>menggelar</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>menggelar</td>
+<td>alog</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>alog</td>
+<td>kebangsaan</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">318</td>
+<td>maluku</td>
+<td>pemilu</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">319</td>
+<td>pemilu</td>
+<td>pemilu</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">320</td>
+<td>pemilu</td>
+<td>alog</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">321</td>
+<td>kebangsaan</td>
+<td>alog</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">322</td>
+<td>kebangsaan</td>
+<td>polda</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>323 rows × 3 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-762f7888-c0f9-4924-ab86-c8c72e378ae2')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-762f7888-c0f9-4924-ab86-c8c72e378ae2 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-762f7888-c0f9-4924-ab86-c8c72e378ae2');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-1866b7f7-537c-41c8-b81c-45b4a3c31366">
+  <button class="colab-df-quickchart" onclick="quickchart('df-1866b7f7-537c-41c8-b81c-45b4a3c31366')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-1866b7f7-537c-41c8-b81c-45b4a3c31366 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<p>Simpan ke excel</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>co_occ_df_single_news.to_excel(<span class="st">'co_occurance_matrix.xlsx'</span>,index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> CountVectorizer()</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>count_matrix <span class="op">=</span> vectorizer.fit_transform(sentences)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>cooccurrence_matrix <span class="op">=</span> (count_matrix.T <span class="op">@</span> count_matrix).toarray()</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> vectorizer.get_feature_names_out()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="eb6a3118-9990-4ec7-c767-fa9e5d14788b">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Membuat DataFrame dari Co-occurrence Matrix</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>cooccurrence_df <span class="op">=</span> pd.DataFrame(cooccurrence_matrix, columns<span class="op">=</span>feature_names, index<span class="op">=</span>feature_names)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Menampilkan DataFrame</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Co-occurrence DataFrame:"</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>cooccurrence_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Co-occurrence DataFrame:</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+
+  <div id="df-82daa247-3e37-4320-8b52-0c1ca23a0c56" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">acara</th>
+<th data-quarto-table-cell-role="th">agama</th>
+<th data-quarto-table-cell-role="th">ajakan</th>
+<th data-quarto-table-cell-role="th">akan</th>
+<th data-quarto-table-cell-role="th">al</th>
+<th data-quarto-table-cell-role="th">alog</th>
+<th data-quarto-table-cell-role="th">aman</th>
+<th data-quarto-table-cell-role="th">ambon</th>
+<th data-quarto-table-cell-role="th">ambonbaca</th>
+<th data-quarto-table-cell-role="th">antara</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">titik</th>
+<th data-quarto-table-cell-role="th">tni</th>
+<th data-quarto-table-cell-role="th">tokoh</th>
+<th data-quarto-table-cell-role="th">tuban</th>
+<th data-quarto-table-cell-role="th">ujarnyakapolda</th>
+<th data-quarto-table-cell-role="th">umum</th>
+<th data-quarto-table-cell-role="th">untuk</th>
+<th data-quarto-table-cell-role="th">wakilwakil</th>
+<th data-quarto-table-cell-role="th">wilayah</th>
+<th data-quarto-table-cell-role="th">yakni</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">acara</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">agama</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>22</td>
+<td>10</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>8</td>
+<td>8</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>12</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ajakan</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">akan</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">al</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">umum</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">untuk</td>
+<td>6</td>
+<td>12</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>66</td>
+<td>30</td>
+<td>12</td>
+<td>6</td>
+<td>6</td>
+<td>...</td>
+<td>6</td>
+<td>24</td>
+<td>24</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>36</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">wakilwakil</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">wilayah</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">yakni</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>217 rows × 217 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-82daa247-3e37-4320-8b52-0c1ca23a0c56')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-82daa247-3e37-4320-8b52-0c1ca23a0c56 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-82daa247-3e37-4320-8b52-0c1ca23a0c56');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-6ea2e901-d74f-43e1-87d4-68aeaf55981c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-6ea2e901-d74f-43e1-87d4-68aeaf55981c')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-6ea2e901-d74f-43e1-87d4-68aeaf55981c button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<section id="konversi-ke-graph" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="konversi-ke-graph"><span class="header-section-number">7.5</span> Konversi ke graph</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Buat graph dari co-occurrence matrix</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>G_single_news <span class="op">=</span> nx.Graph()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> co_occ_df_single_news.iterrows():</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    G_single_news.add_edge(row[<span class="st">'source'</span>], row[<span class="st">'target'</span>], weight<span class="op">=</span>row[<span class="st">'weight'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Visualisasi</p>
+<div class="cell" data-outputid="83da9bf8-8de3-492b-d9ed-c9d325fe4b2b">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisasi graph dengan penyesuaian</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">8</span>))</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Penentuan layout graf</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G_single_news, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Gambar edges</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(G_single_news, pos, alpha<span class="op">=</span><span class="fl">0.8</span>, edge_color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gambar nodes</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(G_single_news, pos, node_size<span class="op">=</span><span class="dv">1000</span>, node_color<span class="op">=</span><span class="st">"skyblue"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Label nodes</span></span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(G_single_news, pos, font_size<span class="op">=</span><span class="dv">6</span>, font_color<span class="op">=</span><span class="st">"black"</span>, font_weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Visualisasi Graph"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="KatakunciPPW_Beritasatu_com_20_095_Akhmad_Raihan_A_F_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="menghitung-centrality-node" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="menghitung-centrality-node"><span class="header-section-number">7.6</span> Menghitung centrality node</h2>
+<p>Algoritma PageRank</p>
+<p>Pengertian page rank sendiri yaitu algoritma yang dibuat oleh google yang berguna untuk membantu mesin telusur agar membandingkan halaman yang memenuhi kueri tertentu berdasarkan seberapa sering mereka di referensikan.</p>
+<p>Rumus Page Rank</p>
+<p><span class="math display">\[PR(A) = (1 - d) + d \left( \frac{PR(B)}{L(B)} + \frac{PR(C)}{L(C)} + \ldots + \frac{PR(N)}{L(N)} \right)
+\]</span></p>
+<p><span class="math display">\[\begin{align*}
+    &amp;\bullet \quad PR(A) \text{ adalah PageRank dari halaman } A. \\
+    &amp;\bullet \quad d \text{ adalah faktor damping, biasanya diatur menjadi } 0.85. \\
+    &amp;\text{Ini mewakili probabilitas bahwa pengguna akan melanjutkan ke halaman lain daripada mengklik tautan.} \\
+    &amp;\bullet \quad PR(B), PR(C), \ldots \text{ adalah PageRank dari halaman-halaman yang memiliki tautan ke halaman } A. \\
+    &amp;\bullet \quad L(B), L(C), \ldots \text{ adalah jumlah tautan keluar dari masing-masing halaman } B, C, \ldots.
+\end{align*}\]</span></p>
+<p>Dan rumus ini ketika pagerank sudah melakukan iterasi berikutnya <span class="math display">\[PR^{(t+1)}(A) = (1 - d) + d \left( \frac{PR^{(t)}(B)}{L(B)} + \frac{PR^{(t)}(C)}{L(C)} + \ldots + \frac{PR^{(t)}(N)}{L(N)} \right)
+\]</span></p>
+<p>Perhitungan otomatis</p>
+<div class="cell" data-outputid="8923a003-c42e-4a57-8e76-17505155a8e8">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Closeness centrality</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>closeness_centrality_single_news <span class="op">=</span> nx.closeness_centrality(G_single_news)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>closeness_df <span class="op">=</span> pd.DataFrame(<span class="bu">list</span>(closeness_centrality_single_news.items()), columns<span class="op">=</span>[<span class="st">'token'</span>, <span class="st">'closeness_centrality'</span>])</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pagerank centrality</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>pagerank_centrality_single_news <span class="op">=</span> nx.pagerank(G_single_news)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>pagerank_df <span class="op">=</span> pd.DataFrame(<span class="bu">list</span>(pagerank_centrality_single_news.items()), columns<span class="op">=</span>[<span class="st">'token'</span>, <span class="st">'pagerank_centrality'</span>])</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan DataFrame</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"DataFrame Closeness Centrality:"</span>)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(closeness_df)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">DataFrame Pagerank Centrality:"</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pagerank_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame Closeness Centrality:
+                  token  closeness_centrality
+0                 ambon              0.237102
+1                 polda              0.271698
+2                maluku              0.294278
+3             menggelar              0.245176
+4                  alog              0.283837
+..                  ...                   ...
+212         menimbulkan              0.257449
+213          perpecahan              0.232258
+214  pungkasnyakegiatan              0.233010
+215       penyelenggara              0.257757
+216               yakni              0.247423
+
+[217 rows x 2 columns]
+
+DataFrame Pagerank Centrality:
+                  token  pagerank_centrality
+0                 ambon             0.003700
+1                 polda             0.008898
+2                maluku             0.018979
+3             menggelar             0.002773
+4                  alog             0.014662
+..                  ...                  ...
+212         menimbulkan             0.003043
+213          perpecahan             0.003040
+214  pungkasnyakegiatan             0.002838
+215       penyelenggara             0.002712
+216               yakni             0.002711
+
+[217 rows x 2 columns]</code></pre>
+</div>
+</div>
+<p>Perhitungan Manual</p>
+<div class="cell" data-outputid="ee1b346c-0afd-4173-d4a6-2527e802905b">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Baca file Excel</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(<span class="st">"/content/drive/MyDrive/ppw/PageRank/co_occurance_matrix.xlsx"</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan DataFrame</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+
+  <div id="df-207eee57-0b59-4805-aa60-0fed1945ca4a" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">source</th>
+<th data-quarto-table-cell-role="th">target</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">-</th>
+<th data-quarto-table-cell-role="th">Initial Page rank</th>
+<th data-quarto-table-cell-role="th">Current Page Rank iterasi 1</th>
+<th data-quarto-table-cell-role="th">penerapan</th>
+<th data-quarto-table-cell-role="th">hasil 1</th>
+<th data-quarto-table-cell-role="th">-.1</th>
+<th data-quarto-table-cell-role="th">Iterasi 2</th>
+<th data-quarto-table-cell-role="th">penerapan 2</th>
+<th data-quarto-table-cell-role="th">hasil 2</th>
+<th data-quarto-table-cell-role="th">hasil 3</th>
+<th data-quarto-table-cell-role="th">hasil 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ambon</td>
+<td>polda</td>
+<td>1</td>
+<td>323 node = 1/323 &gt; 0,00309597523</td>
+<td>0.003096</td>
+<td>(1-0.85) + 0.85 (pr(polda) / 1)</td>
+<td>0,15 + 0,85 (0,00309597523 / 1)</td>
+<td>0.152632</td>
+<td>NaN</td>
+<td>(1-0.85) + 0.85 (pr(polda)/1)</td>
+<td>0,15 + 0,85 (0,152631579/1)</td>
+<td>0.279737</td>
+<td>0.387776</td>
+<td>0.479610</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>polda</td>
+<td>maluku</td>
+<td>4</td>
+<td>NaN</td>
+<td>0.003096</td>
+<td>(1-0.85) + 0.85 (pr(maluku) / 4)</td>
+<td>0,15 + 0,85 (0,00309597523 / 4)</td>
+<td>0.150658</td>
+<td>NaN</td>
+<td>(1-0.85) + 0.85 (pr(maluku)/4)</td>
+<td>0,15 + 0,85 (0,150657895/4)</td>
+<td>0.182015</td>
+<td>0.188678</td>
+<td>0.190094</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>maluku</td>
+<td>menggelar</td>
+<td>1</td>
+<td>NaN</td>
+<td>0.003096</td>
+<td>(1-0.85) + 0.85 (pr(menggelar) / 1)</td>
+<td>0,15 + 0,85 (0,00309597523 / 1)</td>
+<td>0.152632</td>
+<td>NaN</td>
+<td>(1-0.85) + 0.85 (pr(menggelar)/1)</td>
+<td>0,15 + 0,85 (0,152631579/1)</td>
+<td>0.279737</td>
+<td>0.387776</td>
+<td>0.479610</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>menggelar</td>
+<td>alog</td>
+<td>1</td>
+<td>NaN</td>
+<td>0.003096</td>
+<td>(1-0.85) + 0.85 (pr(alog) / 1)</td>
+<td>0,15 + 0,85 (0,00309597523 / 1)</td>
+<td>0.152632</td>
+<td>NaN</td>
+<td>(1-0.85) + 0.85 (pr(alog)/1)</td>
+<td>0,15 + 0,85 (0,152631579/1)</td>
+<td>0.279737</td>
+<td>0.387776</td>
+<td>0.479610</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>alog</td>
+<td>kebangsaan</td>
+<td>9</td>
+<td>NaN</td>
+<td>0.003096</td>
+<td>(1-0.85) + 0.85 (pr(kebangsaan) / 9)</td>
+<td>0,15 + 0,85 (0,00309597523 / 9)</td>
+<td>0.150292</td>
+<td>NaN</td>
+<td>(1-0.85) + 0.85 (pr(kebangsaan)/9)</td>
+<td>0,15 + 0,85 (0,150292398/9)</td>
+<td>0.164194</td>
+<td>0.165507</td>
+<td>0.165631</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-207eee57-0b59-4805-aa60-0fed1945ca4a')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-207eee57-0b59-4805-aa60-0fed1945ca4a button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-207eee57-0b59-4805-aa60-0fed1945ca4a');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-77da53ae-066a-4034-b057-1c8ec8b5bf2c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-77da53ae-066a-4034-b057-1c8ec8b5bf2c')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-77da53ae-066a-4034-b057-1c8ec8b5bf2c button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<section id="ranking-node" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="ranking-node"><span class="header-section-number">7.7</span> Ranking Node</h2>
+<div class="cell" data-outputid="d00cc92c-c682-432c-e96e-d356771e178f">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merangking node kata dari closeness centrality</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>ranked_by_closeness_single_news <span class="op">=</span> closeness_df.sort_values(by<span class="op">=</span><span class="st">'closeness_centrality'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hasil ranking dari closeness centrality:"</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>ranked_by_closeness_single_news</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hasil ranking dari closeness centrality:</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+
+  <div id="df-9ede2391-ddc8-491e-b365-0c697b8a2948" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">token</th>
+<th data-quarto-table-cell-role="th">closeness_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17</td>
+<td>pemilu</td>
+<td>0.324324</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>maluku</td>
+<td>0.294278</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>alog</td>
+<td>0.283837</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">63</td>
+<td>dalam</td>
+<td>0.280884</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>mewujudkan</td>
+<td>0.273764</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">83</td>
+<td>sangat</td>
+<td>0.122658</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">202</td>
+<td>wakilwakil</td>
+<td>0.119271</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">205</td>
+<td>hindari</td>
+<td>0.118486</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">204</td>
+<td>berkualitas</td>
+<td>0.110204</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">203</td>
+<td>rakyat</td>
+<td>0.109700</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>217 rows × 2 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9ede2391-ddc8-491e-b365-0c697b8a2948')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-9ede2391-ddc8-491e-b365-0c697b8a2948 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9ede2391-ddc8-491e-b365-0c697b8a2948');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-e09a7b50-fc6b-42b1-9c9e-d0e6f6748177">
+  <button class="colab-df-quickchart" onclick="quickchart('df-e09a7b50-fc6b-42b1-9c9e-d0e6f6748177')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-e09a7b50-fc6b-42b1-9c9e-d0e6f6748177 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="cell" data-outputid="b0df2df8-88e4-44bb-ce4a-34024c8e3735">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merangking node kata dari pagerank centrality</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>ranked_by_pagerank_single_news <span class="op">=</span> pagerank_df.sort_values(by<span class="op">=</span><span class="st">'pagerank_centrality'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hasil ranking dari page rank:"</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>ranked_by_pagerank_single_news</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hasil ranking dari page rank:</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+
+  <div id="df-e233ebd8-e302-4f46-8ede-7dcfe277c5bf" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">token</th>
+<th data-quarto-table-cell-role="th">pagerank_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17</td>
+<td>pemilu</td>
+<td>0.037457</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>maluku</td>
+<td>0.018979</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>untuk</td>
+<td>0.016171</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>alog</td>
+<td>0.014662</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>damai</td>
+<td>0.012316</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>lancar</td>
+<td>0.002662</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">92</td>
+<td>katanyajelang</td>
+<td>0.002638</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">120</td>
+<td>hingga</td>
+<td>0.002088</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">152</td>
+<td>kebangsaandengan</td>
+<td>0.001824</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">58</td>
+<td>kebangsaandalam</td>
+<td>0.001824</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>217 rows × 2 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e233ebd8-e302-4f46-8ede-7dcfe277c5bf')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e233ebd8-e302-4f46-8ede-7dcfe277c5bf button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e233ebd8-e302-4f46-8ede-7dcfe277c5bf');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-b48ed357-72ed-4e0f-90e5-850e21fd5716">
+  <button class="colab-df-quickchart" onclick="quickchart('df-b48ed357-72ed-4e0f-90e5-850e21fd5716')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-b48ed357-72ed-4e0f-90e5-850e21fd5716 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cosine_similarity.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Preprocessing dan implementasi Cosinus Similarity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
